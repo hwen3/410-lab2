@@ -14,6 +14,7 @@ class ClientThread(threading.Thread):
 			data = self.client.recv(1024)
 			if (data.rstrip() == '\x1b'):
 				self.client.close()
+				break
 			else:
 				response = str(data).rstrip() + " Han\n"
 				self.client.sendall(response.encode('UTF8'))
