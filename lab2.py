@@ -23,9 +23,8 @@ class PyServer(object):
 
 	def __init__(self):
 		self.port = 8080
-		self.queue_size = 5
+		self.queue_size = 10
 		self.host = "localhost"
-		self.threads = []
 		self.read_buff_size = 1024
 		self.server = None
 
@@ -46,11 +45,6 @@ class PyServer(object):
 			conn, addr = self.server.accept()
 			client = ClientThread(conn)
 			client.start()
-			self.threads.append(client)
-
-
-		for client in self.threads:
-			client.join()
 
 		self.server.close()
 
